@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympský olivový vepřík</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --brown: #6B4F3A;
+      --green: #3B5D3F;
+      --brown-light: #A07855;
+      --dark: #1F1F1F;
+      --cream: #F5F0EA;
+      --cream-dark: #EDE6DA;
+      --white: #FFFFFF;
+      --text: #2C2C2C;
+      --text-light: #5A5A5A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background-color: var(--white);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 96px;
+      background: transparent;
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(6px);
+      border-bottom-color: rgba(107,79,58,0.12);
+    }
+
+    .nav-logo img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    nav.scrolled .nav-links a {
+      color: var(--dark);
+      text-shadow: none;
+    }
+
+    .nav-links a:hover {
+      color: rgba(255,255,255,0.7);
+    }
+
+    nav.scrolled .nav-links a:hover {
+      color: var(--brown);
+    }
+
+    .nav-cta {
+      background: var(--brown);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      transition: background 0.2s !important;
+      text-shadow: none !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--brown-light) !important;
+      color: var(--white) !important;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 80px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('prase/_AM12560.JPG');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.72);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 80px;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 300;
+      font-size: clamp(38px, 5.5vw, 68px);
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--brown);
+    }
+
+    .btn-white:hover {
+      background: var(--cream);
+    }
+
+    .btn-brown {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    .btn-brown:hover {
+      background: var(--brown-light);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--brown);
+      color: var(--brown);
+    }
+
+    .btn-outline:hover {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 48px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+
+    h2 em {
+      font-style: italic;
+    }
+
+    h3 {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--text-light);
+      font-weight: 300;
+      max-width: 640px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--brown);
+      margin-bottom: 32px;
+    }
+
+    /* INTRO */
+    .intro {
+      background: var(--cream);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .intro-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .intro-text p {
+      max-width: none;
+      margin-bottom: 20px;
+      font-size: 17px;
+    }
+
+    .intro-text p:last-of-type {
+      margin-bottom: 36px;
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--dark);
+      padding: 80px 48px;
+    }
+
+    .stats-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .stat {
+      background: var(--dark);
+      padding: 48px 36px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 300;
+      font-size: 52px;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .stat-unit {
+      font-size: 22px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.4;
+    }
+
+    /* STORY */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .story-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .story-imgs img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .story-imgs img:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/9;
+    }
+
+    .story-text {
+      padding-top: 16px;
+    }
+
+    .story-text p {
+      max-width: none;
+      margin-bottom: 20px;
+    }
+
+    /* QUALITIES */
+    .qualities {
+      background: var(--cream);
+    }
+
+    .qualities-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .qualities-header .divider {
+      margin: 0 auto 32px;
+    }
+
+    .qualities-header p {
+      margin: 0 auto;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .qualities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(107,79,58,0.1);
+    }
+
+    .quality-card {
+      background: var(--cream);
+      padding: 48px 36px;
+    }
+
+    .quality-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--brown);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .quality-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--white);
+    }
+
+    .quality-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .quality-card p {
+      font-size: 15px;
+      max-width: none;
+    }
+
+    /* GALLERY */
+    .gallery {
+      padding: 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* PATENT */
+    .patent {
+      background: var(--green);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .patent .section-inner {
+      max-width: 720px;
+    }
+
+    .patent .section-label {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .patent h2 {
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .patent p {
+      color: rgba(255,255,255,0.75);
+      max-width: none;
+      margin: 0 auto 40px;
+      font-size: 18px;
+    }
+
+    .patent-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 24px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--white);
+    }
+
+    .btn-white-outline {
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      border-radius: 2px;
+      display: inline-block;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-white-outline:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--white);
+    }
+
+    /* CTA STRIP */
+    .cta-strip {
+      background: var(--cream-dark);
+      padding: 80px 48px;
+      text-align: center;
+    }
+
+    .cta-strip h2 {
+      margin-bottom: 16px;
+    }
+
+    .cta-strip p {
+      margin: 0 auto 40px;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 64px 48px 40px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
+      flex-wrap: wrap;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 300;
+      font-size: 20px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .footer-copy {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* HAMBURGER */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    nav.scrolled .nav-hamburger span {
+      background: var(--dark);
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(107,79,58,0.12);
+      flex-direction: column;
+      padding: 16px 24px 24px;
+      z-index: 99;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(107,79,58,0.1);
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:last-child {
+      border-bottom: none;
+      margin-top: 8px;
+      background: var(--brown);
+      color: var(--white);
+      text-align: center;
+      padding: 14px;
+      border-radius: 2px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 72px 24px; }
+      .hero-content { padding: 0 28px; }
+      .intro-grid,
+      .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .intro-img { aspect-ratio: 16/9; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .qualities-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-links { gap: 32px; }
+      .patent { padding: 72px 24px; }
+      .stats { padding: 60px 24px; }
+      .cta-strip { padding: 60px 24px; }
+    }
+
+    @media (max-width: 540px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .stat-number { font-size: 38px; }
+      .story-imgs { grid-template-columns: 1fr; }
+      .story-imgs img:first-child { aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo"><img src="prase/logo.jpg" alt="Black Pig of Olympus – Fotiadis"></a>
+    <ul class="nav-links">
+      <li><a href="#pribeh">Příběh</a></li>
+      <li><a href="#kvalita">Kvalita</a></li>
+      <li><a href="#farma">Farma</a></li>
+      <li><a href="https://eshop.olympskyveprik.cz" target="_blank" class="nav-cta">Koupit</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#pribeh" onclick="closeMobile()">Příběh</a>
+    <a href="#kvalita" onclick="closeMobile()">Kvalita</a>
+    <a href="#farma" onclick="closeMobile()">Farma</a>
+    <a href="https://eshop.olympskyveprik.cz" target="_blank">Koupit</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Rodinná farma Fotiadis &mdash; pod horou Olymp od roku 1925</p>
+      <h1>Olympský černý<br><em>olivový vepřík</em></h1>
+      <p class="hero-sub">Uznané EU jako samostatné plemeno. Chované pod bájnou horou Olymp, krmené olivami a místními bylinkami — přes 3&nbsp;500 let řecké tradice.</p>
+      <a href="https://eshop.olympskyveprik.cz" target="_blank" class="btn btn-white">Přejít do e-shopu</a>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section style="padding: 80px 48px; text-align: center; background: var(--white);">
+    <div style="max-width: 680px; margin: 0 auto;">
+      <h2 style="font-family: 'Source Serif 4', serif; font-weight: 300; font-size: clamp(24px, 3vw, 36px); color: var(--dark); margin-bottom: 24px; line-height: 1.25;">Záleží vám na tom, co jíte?<br><em>Nám také.</em></h2>
+      <p style="font-size: 18px; color: var(--text-light); font-weight: 300; line-height: 1.7; max-width: none; margin-bottom: 16px;">Olivový vepřík není jen maso – je to kvalita, která začíná u krmení. Protože stejně jako my, i prasata jsou tím, co jedí.</p>
+      <p style="font-size: 16px; color: var(--brown-light); font-weight: 400; max-width: none; letter-spacing: 0.02em;">Mrkněte níže na unikátní, patentované složení stravy, které dělá rozdíl.</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="pribeh">
+    <div class="section-inner">
+      <div class="intro-grid">
+        <div>
+          <img src="prase/LCL02458.jpg" alt="Olympský černý vepřík" class="intro-img">
+        </div>
+        <div class="intro-text">
+          <p class="section-label">Původ &amp; Tradice</p>
+          <div class="divider"></div>
+          <h2>Uznané EU<br><em>plemeno s historií</em></h2>
+          <p>Olympský černý vepřík krmený olivami je uznaný Evropskou unií jako samostatné plemeno. Rodinná farma Fotiadis se nachází od roku 1925 pod bájnou horou Olymp — lokalitou s absolutní absencí průmyslu.</p>
+          <p>Černý vepřík je v Řecku znám přes <strong>3&nbsp;500 let</strong> a je praotcem evropských plemen — dle nalezených zbytků chovu u města Drama v severovýchodním Řecku.</p>
+          <a href="#kvalita" class="btn btn-outline">Zjistit více</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number">57<span class="stat-unit">×</span></div>
+        <div class="stat-label">více omega&#8209;3 &amp; omega&#8209;6<br>mastných kyselin</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3&thinsp;500</div>
+        <div class="stat-label">let v řecké<br>tradici chovu</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">1925</div>
+        <div class="stat-label">rok vzniku<br>farmy Fotiadis</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">1</div>
+        <div class="stat-label">jediný certifikovaný<br>chov krmený olivami</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section id="farma">
+    <div class="section-inner">
+      <div class="story-grid">
+        <div class="story-imgs">
+          <img src="prase/DJI_20231115091223_0009_D.jpg" alt="Pohled na farmu z dronu">
+          <img src="prase/LCL02417.jpg" alt="Vepříci na farmě">
+          <img src="prase/LCL02427.jpg" alt="Detail chovu">
+        </div>
+        <div class="story-text">
+          <p class="section-label">Farma &amp; Prostředí</p>
+          <div class="divider"></div>
+          <h2>Pod horou Olymp,<br><em>daleko od průmyslu</em></h2>
+          <p>Farma Fotiadis leží ve výjimečné poloze — pod bájnou horou Olymp, v oblasti s <strong>absolutní absencí průmyslu</strong>. Čistý vzduch, pramenité vody a přirozené prostředí vytvářejí ideální podmínky pro chov.</p>
+          <p>Částečný volný výběh, krmení olivami a místními bylinkami propůjčuje masu výjimečnou chuť a nutričně neobvyklé složení. Maso obsahuje antioxidanty, polyfenoly, železo a výrazně vyšší množství zdravých mastných kyselin.</p>
+          <p>Způsob chovu je od roku 2014 <strong>patentován v Řecku</strong> pod číslem 1008709 a světově pod PCT/GR/2015/000057. Na základě analýzy vzorku masa jde o jediný certifikovaný chov krmený olivami.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALITIES -->
+  <section class="qualities" id="kvalita">
+    <div class="section-inner">
+      <div class="qualities-header">
+        <p class="section-label">Výjimečná kvalita</p>
+        <div class="divider"></div>
+        <h2>Proč je maso <em>jedinečné</em></h2>
+        <p>Kombinace původního plemene, čistého prostředí a tradičního krmení olivami a bylinkami vytváří produkt, který nemá v Evropě srovnání.</p>
+      </div>
+      <div class="qualities-grid">
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          </div>
+          <h3>Omega&#8209;3 &amp; Omega&#8209;6</h3>
+          <p>Maso obsahuje až 57× větší množství omega&#8209;3 a omega&#8209;6 mastných kyselin oproti běžnému vepřovému masu z konvenčního chovu.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2z"/></svg>
+          </div>
+          <h3>Olivy a byliny</h3>
+          <p>Tradiční krmení olivami a místními horskými bylinkami z okolí Olympu dává masu charakteristickou chuť a bohatý nutriční profil — antioxidanty a polyfenoly.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </div>
+          <h3>Certifikace &amp; Patent</h3>
+          <p>Jediný certifikovaný chov krmený olivami na světě. Patent č. 1008709 (Řecko, 2014) a mezinárodní PCT/GR/2015/000057 chrání tento jedinečný způsob chovu.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-6h2v6zm0-8h-2v-2h2v2z"/></svg>
+          </div>
+          <h3>EU uznané plemeno</h3>
+          <p>Olympský černý vepřík je Evropskou unií uznán jako samostatné chráněné plemeno s přesně vymezenými charakteristikami a původem.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          </div>
+          <h3>Rodinná tradice</h3>
+          <p>Od roku 1925 pečuje rodina Fotiadis o stádo pod horou Olymp. Čtyři generace zkušeností a vášně pro tradiční chov v čistém prostředí.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Volný výběh</h3>
+          <p>Částečný volný výběh v přirozeném prostředí olympského podhůří. Prasata se pohybují přirozeně, bez přeplněných chovů a průmyslových metod.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="prase/LCL02426.jpg" alt="Farma Fotiadis">
+      </div>
+      <div class="gallery-item">
+        <img src="prase/IMG_4910.jpg" alt="Produkty z vepříka">
+      </div>
+      <div class="gallery-item">
+        <img src="prase/_XX10378.JPG" alt="Olympský vepřík">
+      </div>
+      <div class="gallery-item">
+        <img src="prase/2023.jpg" alt="Chov 2023">
+      </div>
+      <div class="gallery-item">
+        <img src="prase/2014.jpg" alt="Od roku 2014">
+      </div>
+      <div class="gallery-item">
+        <img src="prase/LCL02458.jpg" alt="Černý vepřík">
+      </div>
+    </div>
+  </div>
+
+  <!-- PATENT -->
+  <section class="patent">
+    <div class="section-inner">
+      <p class="section-label">Ochrana &amp; Certifikace</p>
+      <div class="divider" style="margin: 0 auto 32px;"></div>
+      <h2>Chráněný způsob<br><em>chovu olivového vepříka</em></h2>
+      <p>Na základě analýzy vzorku masa jde o jediný certifikovaný chov krmený olivami na světě. Patentovaný způsob chovu zaručuje autenticitu a výjimečnou kvalitu každého kusu.</p>
+      <div class="patent-badges">
+        <div class="badge">PCT/GR/2015/000057</div>
+        <div class="badge">EU Uznané plemeno</div>
+        <div class="badge">Certifikovaný chov</div>
+      </div>
+      <div style="margin-bottom: 32px;">
+        <a href="WO_2016083853_A1%20(1).pdf" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:10px; padding:14px 28px; border:1px solid rgba(181,162,10,0.5); border-radius:2px; color:#b5a20a; font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(181,162,10,0.1)';this.style.borderColor='#b5a20a'" onmouseout="this.style.background='transparent';this.style.borderColor='rgba(181,162,10,0.5)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b5a20a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Zobrazit patent (PDF)
+        </a>
+      </div>
+      <a href="https://eshop.olympskyveprik.cz" target="_blank" class="btn-white-outline">Prozkoumat produkty</a>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; height: 460px; overflow: hidden;">
+    <div style="overflow:hidden;">
+      <img src="prase/εργοστασιο.jpg" alt="Zpracovna" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <div style="background:var(--cream); display:flex; flex-direction:column; justify-content:center; padding: 72px 80px;">
+      <p class="section-label">Pod horou Olymp</p>
+      <div class="divider"></div>
+      <h2 style="margin-bottom:20px;">Z farmy přímo<br><em>na váš stůl</em></h2>
+      <p style="max-width:none; margin-bottom:36px;">Dopřejte si prémiové maso z olympského černého vepříka. Objednejte jednoduše online a my vám ho doručíme po celé Praze v chlazeném balení, připravené rovnou na váš stůl.</p>
+      <a href="https://eshop.olympskyveprik.cz" target="_blank" class="btn btn-brown" style="align-self:flex-start;">Objednat nyní</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">
+      <span>&copy; 2025 Olympský olivový vepřík. Veškerá práva vyhrazena.</span>
+      <span>Farma Fotiadis &mdash; Olymp, Řecko</span>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('nav');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
