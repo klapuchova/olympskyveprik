@@ -539,9 +539,9 @@
 
     /* FOOTER */
     footer {
-      background: var(--dark);
+      background: var(--cream-dark);
       padding: 64px 48px 40px;
-      color: rgba(255,255,255,0.45);
+      color: rgba(44,44,44,0.55);
     }
 
     .footer-inner {
@@ -751,6 +751,121 @@
       .story-imgs { grid-template-columns: 1fr; }
       .story-imgs img:first-child { aspect-ratio: 4/3; }
     }
+
+    /* KONTAKTY */
+    .kontakty {
+      background: #2A1A0E;
+      padding: 60px 48px;
+    }
+
+    .kontakty-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .kontakty .section-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .kontakty .divider {
+      background: var(--brown-light);
+    }
+
+    .kontakty-text .motto {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(18px, 2.2vw, 24px);
+      color: var(--cream);
+      line-height: 1.5;
+      margin-bottom: 40px;
+      max-width: none;
+    }
+
+    .kontakty-block {
+      margin-bottom: 32px;
+    }
+
+    .kontakty-block h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: 12px;
+    }
+
+    .kontakty-block address {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .kontakty-block address strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .kontakty-block address a {
+      color: var(--brown-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .kontakty-block address a:hover {
+      color: var(--cream);
+    }
+
+    .kontakty-note {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: none;
+      border-left: 2px solid var(--brown-light);
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .kontakty-photo-wrap {
+      position: relative;
+      width: 75%;
+      margin: 0 auto;
+    }
+
+    .kontakty-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .kontakty-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(31,31,31,0.75));
+      padding: 32px 24px 20px;
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 900px) {
+      .kontakty-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .kontakty-photo-wrap img {
+        aspect-ratio: 4/3;
+      }
+    }
   </style>
 </head>
 <body>
@@ -762,6 +877,7 @@
       <li><a href="#pribeh">Příběh</a></li>
       <li><a href="#kvalita">Kvalita</a></li>
       <li><a href="#farma">Farma</a></li>
+      <li><a href="#kontakty">Kontakty</a></li>
       <li><a href="https://eshop.olympskyveprik.cz" target="_blank" class="nav-cta">Koupit</a></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -774,6 +890,7 @@
     <a href="#pribeh" onclick="closeMobile()">Příběh</a>
     <a href="#kvalita" onclick="closeMobile()">Kvalita</a>
     <a href="#farma" onclick="closeMobile()">Farma</a>
+    <a href="#kontakty" onclick="closeMobile()">Kontakty</a>
     <a href="https://eshop.olympskyveprik.cz" target="_blank">Koupit</a>
   </div>
 
@@ -975,11 +1092,50 @@
     </div>
   </div>
 
+  <!-- KONTAKTY -->
+  <section class="kontakty" id="kontakty">
+    <div class="section-inner">
+      <div class="kontakty-grid">
+        <div class="kontakty-text">
+          <p class="section-label">Kontakty</p>
+          <div class="divider"></div>
+          <p class="motto">Řecko je symbolem jedinečnosti a autentické chuti.<br>Dopřejte si kvalitu a pečujte o to, co jíte.</p>
+
+          <div class="kontakty-block">
+            <h4>Odběrné místo</h4>
+            <address>
+              <strong>Kavala restaurace</strong><br>
+              Charlese de Gaulla 5<br>
+              Praha 6 – Bubeneč, 160 00<br>
+              Tel.: <a href="tel:+420604412203">604 412 203</a>
+            </address>
+          </div>
+
+          <div class="kontakty-block">
+            <h4>Pro odborné dotazy a větší odběr</h4>
+            <address>
+              <strong>Ing. Ioannis Asarlidis</strong><br>
+              <a href="mailto:kavala@kavala-praha.cz">kavala@kavala-praha.cz</a><br>
+              Tel.: <a href="tel:+420731489281">731 489 281</a>
+            </address>
+          </div>
+
+          <p class="kontakty-note">Pro individuální nabídky a velkoobchodní spolupráci nás neváhejte kontaktovat. Rádi vám poskytneme osobní přístup na úrovni, kterou si zasloužíte.</p>
+        </div>
+
+        <div class="kontakty-photo-wrap">
+          <img src="prase/ioannis_asarlidis.jpg" alt="Ing. Ioannis Asarlidis">
+          <div class="kontakty-photo-caption">Ing. Ioannis Asarlidis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-copy">
       <span>&copy; 2025 Olympský olivový vepřík. Veškerá práva vyhrazena.</span>
-      <span>Farma Fotiadis &mdash; Olymp, Řecko</span>
+      <span><a href="https://farma-fotiadi.gr/en/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid rgba(44,44,44,0.25); transition: border-color 0.2s;" onmouseover="this.style.borderColor='rgba(107,79,58,0.7)'" onmouseout="this.style.borderColor='rgba(44,44,44,0.25)'">Farma Fotiadis &mdash; Olymp, Řecko</a></span>
     </div>
   </footer>
 
